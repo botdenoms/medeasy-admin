@@ -1,26 +1,26 @@
 import './styles.css'
 
-function Users({users=[]}) {
+function Specialists({list=[]}) {
     return (
         <div className='board'>
-            <h4>Users</h4>
+            <h4>Specialists</h4>
             <div className='itemslist'>
                 {
-                    users.map((item, index)=>{
+                    list.map((item, index)=>{
                         return (
                             <div key={index} className="usercard">
                                 <span>{item.name}</span>
-                                <span>{item.telephone}</span>
-                                <span>{item.email}</span>
-                                <span>{item.at.toDateString()}</span>
+                                <span>{item.speciality}</span>
+                                {/* <span>{item.profile}</span> */}
+                                <span>{item.location.toString()}</span>
+                                {/* <span>{item.at.toDateString()}</span> */}
                             </div>
                         )
                     })
                 }
             </div>
-            
         </div>
     )
 }
 
-export default Users
+export default Specialists

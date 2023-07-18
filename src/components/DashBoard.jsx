@@ -1,5 +1,27 @@
+import { useState, useEffect } from 'react'
 
-function DashBoard({users=[]}) {
+import Specialists from "./Specialists"
+
+function DashBoard({users=[], specialists=[], schedules=[],  regHandler=false}) {
+    
+    // state
+    const [verified, setVerified] = useState(0)
+    // functions
+    const toReg = ()=>{
+        if(regHandler == false){
+            return
+        }
+        regHandler(4)
+    }
+    const verifiedSpecialists = ()=>{
+        const lst = specialists.filter((v)=> v.verified === true)
+        setVerified(lst.length)
+    }
+    useEffect(() => {
+        verifiedSpecialists()
+    }, [])
+
+    // ui
     return (
         <div className="dashBoard">
             <div className="stats">
@@ -11,13 +33,13 @@ function DashBoard({users=[]}) {
                     </div>
                     <div className="data-row">
                         <span>Schedules</span>
-                        <span>0</span>
+                        <span>{schedules.length}</span>
                     </div>
                 </div>
                 <div className="stats-row">
                     <div className="data-row">
                         <span>Specialists</span>
-                        <span>0</span>
+                        <span>{specialists.length}</span>
                     </div>
                 </div>
             </div>
@@ -27,13 +49,13 @@ function DashBoard({users=[]}) {
                     <h5>Specialists </h5>
                     <div className="data-row">
                         <span>Registrations made: </span>
-                        <span>0</span>
+                        <span>{specialists.length}</span>
                     </div>
                 </div>
                 <div className="stats-row">
                     <div className="data-row">
                         <span>Verified: </span>
-                        <span>0</span>
+                        <span>{verified}</span>
                     </div>
                 </div>
                 <div className="stats-row">
@@ -45,8 +67,8 @@ function DashBoard({users=[]}) {
                 <div className="stats-row">
                     <div className="data-row">
                         <span>Pending: </span>
-                        <span>0</span>
-                        <button>Registrations</button>
+                        <span>{specialists.length - verified}</span>
+                        <button onClick={()=> toReg()}>Registrations</button>
                     </div>
                 </div>
             </div>

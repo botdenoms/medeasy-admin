@@ -6,7 +6,7 @@ import { firebaseConfig } from './config/config'
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app"
-import { getFirestore, collection, getDocs } from "firebase/firestore"
+import { getFirestore, initializeFirestore, collection, getDocs, persistentLocalCache } from "firebase/firestore"
 
 import AppBar from './components/AppBar'
 import SideBar from './components/SideBar'
@@ -15,7 +15,8 @@ import Content from './components/Content'
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)
-const db = getFirestore(app)
+const db = initializeFirestore(app, {localCache: persistentLocalCache()})
+// getFirestore(app)
 
 function App() {
   const [tab, setTab] = useState(0)
@@ -40,7 +41,8 @@ function App() {
           name: dt.name,
           telephone: dt.telephone,
           email: dt.email,
-          at: dt.at.toDate()
+          at: dt.at.toDate(),
+          specialist: dt.specialist
         }
         items.push(item)
       })
@@ -61,16 +63,34 @@ function App() {
       var items = []
       querySnap.forEach((doc)=>{
         const dt = doc.data()
-        var item ={
-          id: doc.id,
-          location: dt.location,
-          speciality: dt.speciality,
-          cert: dt.cert,
-          profile: dt.profile,
-          name: dt.name,
-          reg: dt.regNo
+        // check if verified 
+        if(doc.get('verified') === true){
+          // check if geo
+          // doc.get('geo')
+          var item ={
+            id: doc.id,
+            location: dt.location,
+            speciality: dt.speciality,
+            cert: dt.cert,
+            profile: dt.profile,
+            name: dt.name,
+            reg: dt.regNo,
+            verified: dt.verified,
+            at: dt.at.toDate()
+          }
+          items.push(item)
+        }else{
+          var item ={
+            id: doc.id,
+            location: dt.location,
+            speciality: dt.speciality,
+            cert: dt.cert,
+            profile: dt.profile,
+            name: dt.name,
+            reg: dt.regNo
+          }
+          items.push(item)
         }
-        items.push(item)
       })
       setSpecialists([...items])
     } catch (error) {
@@ -140,7 +160,13 @@ function App() {
       <AppBar />
       <div className='content'>
         <SideBar tab={tab} handler={tabChange}/>
-        <Content tab={tab} users={users} specialists={specialists} schedules={schedules}/>
+        <Content 
+          tab={tab} 
+          users={users} 
+          specialists={specialists} 
+          schedules={schedules}
+          tabHander={tabChange}
+          />
       </div>
     </div>
   )
