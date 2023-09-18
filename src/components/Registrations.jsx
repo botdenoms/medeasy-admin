@@ -48,9 +48,11 @@ function Registrations({users=[], specialist=[], handler=false}) {
                                     </div>
                                 </div>
                                 <div className='rowfx'>
-                                            <img src={item.cert} alt="cert" className='cert'/>
-                                            <img src={item.profile} alt="cert" className='cert'/>
-                                        </div>
+                                    <img src={item.cert} alt="cert" className='cert'/>
+                                </div>
+                                <div className='rowfx'>
+                                    <img src={item.profile} alt="cert" className='prof'/>
+                                </div>
                                 <div className='controls'>
                                     <button>Reject</button>
                                     <button className='apr' onClick={()=> approve(index)}>Approve</button>

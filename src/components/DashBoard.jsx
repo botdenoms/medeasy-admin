@@ -28,17 +28,15 @@ function DashBoard({users=[], specialists=[], schedules=[],  regHandler=false}) 
                 <h4>Overall</h4>
                 <div className="stats-row">
                     <div className="data-row">
-                        <span>Users</span>
+                        <span>Users: </span>
                         <span>{users.length}</span>
                     </div>
                     <div className="data-row">
-                        <span>Schedules</span>
+                        <span>Schedules: </span>
                         <span>{schedules.length}</span>
                     </div>
-                </div>
-                <div className="stats-row">
                     <div className="data-row">
-                        <span>Specialists</span>
+                        <span>Specialists: </span>
                         <span>{specialists.length}</span>
                     </div>
                 </div>

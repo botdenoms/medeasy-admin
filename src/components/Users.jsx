@@ -9,20 +9,18 @@ function Users({users=[]}) {
                     users.map((item, index)=>{
                         return (
                             <div key={index} className="usercard">
-                                <span>
+                                {/* <span>
                                     <span>ID : </span>
                                     {item.id}
-                                </span>
+                                </span> */}
+                                <div className='circ'></div>
                                 <span>
-                                    <span>name : </span>
                                     {item.name}
                                 </span>
                                 <span>
-                                    <span>Telephone : </span>
                                     {item.telephone}
                                 </span>
                                 <span>
-                                    <span>email : </span>
                                     {item.email}
                                 </span>
                                 <span>
