@@ -6,7 +6,7 @@ import { firebaseConfig } from './config/config'
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app"
-import { getFirestore, initializeFirestore, collection, getDocs, persistentLocalCache } from "firebase/firestore"
+import {initializeFirestore, collection, getDocs, persistentLocalCache, doc, updateDoc } from "firebase/firestore"
 
 import AppBar from './components/AppBar'
 import SideBar from './components/SideBar'
@@ -147,6 +147,15 @@ function App() {
     setTab(index)
   }
 
+  const approve = async(id)=>{
+    // approves a specialists
+    const feedback = await updateDoc(doc(collection(db, 'specialists'), id), {
+      'verified': true,
+      'at': new Date(Date.now())
+    })
+    console.log(feedback)
+  }
+
   // effects
   useEffect(() => {
     usersData()
@@ -166,6 +175,7 @@ function App() {
           specialists={specialists} 
           schedules={schedules}
           tabHander={tabChange}
+          approveHandler={approve}
           />
       </div>
     </div>

@@ -1,15 +1,20 @@
 import './styles.css'
 import { useState, useEffect } from 'react'
 
-function Registrations({users=[], specialist=[]}) {
+function Registrations({users=[], specialist=[], handler=false}) {
 
     // state
     const [unVerified, setUnVerified] = useState([])
 
     // functions
-    const registered = (items=[])=>{
+    const approve = (index)=>{
         // return users registered as specialists
-        const lst = items.filter((v)=> v.specialist === true)
+        const spl = unVerified[index]
+        if(handler === false){
+            alert('document upadated not possible')
+            return
+        }
+        handler(spl.id)
     }
 
     // effects
@@ -31,17 +36,24 @@ function Registrations({users=[], specialist=[]}) {
                             <div className='case' key={index}>
                                 <div className='data'>
                                     <div>
+                                        <span>
+                                            <span>id: </span>
+                                            {item.id}
+                                        </span>
                                         <span>{item.name}</span>
                                         <span>{item.speciality}</span>
                                         <span>{item.location.toString()}</span>
                                         <span className='sep'>Credentials</span>
                                         <span>Reg number: {item.reg}</span>
                                     </div>
-                                    <img src={item.cert} alt="cert" className='cert'/>
                                 </div>
+                                <div className='rowfx'>
+                                            <img src={item.cert} alt="cert" className='cert'/>
+                                            <img src={item.profile} alt="cert" className='cert'/>
+                                        </div>
                                 <div className='controls'>
                                     <button>Reject</button>
-                                    <button className='apr'>Approve</button>
+                                    <button className='apr' onClick={()=> approve(index)}>Approve</button>
                                 </div>
                             </div>
                         )

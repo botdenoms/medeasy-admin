@@ -4,7 +4,7 @@ import Specialists from './Specialists';
 import Users from './Users';
 import './styles.css'
 
-function Content({tab=0, users=[], specialists=[], schedules=[], tabHander=false}) {
+function Content({tab=0, users=[], specialists=[], schedules=[], tabHander=false, approveHandler=false}) {
     switch (tab) {
         case 0:
             return <DashBoard 
@@ -18,7 +18,7 @@ function Content({tab=0, users=[], specialists=[], schedules=[], tabHander=false
         case 2:
             return <Specialists list={specialists}/>
         case 4:
-            return <Registrations users={users} specialist={specialists}/>
+            return <Registrations users={users} specialist={specialists} handler={approveHandler}/>
         default:
             return (
                 <div className='notice'>content under development</div>
