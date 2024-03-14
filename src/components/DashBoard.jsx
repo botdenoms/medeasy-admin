@@ -11,11 +11,16 @@ function DashBoard({users=[], specialists=[], schedules=[],  regHandler=false}) 
         if(regHandler == false){
             return
         }
-        regHandler(4)
+        regHandler(7)
     }
     const verifiedSpecialists = ()=>{
-        const lst = specialists.filter((v)=> v.verified === true)
-        setVerified(lst.length)
+        var tmp = []
+        specialists.forEach((v, i)=> {
+            if(v.verified === true){
+                tmp.push(v)
+            }
+        })
+        setVerified(tmp.length)
     }
     useEffect(() => {
         verifiedSpecialists()

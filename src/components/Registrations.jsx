@@ -20,8 +20,14 @@ function Registrations({running=false, specialist=[], handler=false}) {
     // effects
     useEffect(() => {
         //   filter registered accounts only and not verified
-        const lst = specialist.filter((v)=> v.verified != true)
-        setUnVerified([...lst])
+        var tmp = []
+        specialist.forEach((v, i)=> {
+            if(v.verified != true){
+                tmp.push(v)
+            }
+        })
+        // const lst = specialist.map((v)=> v.verified != true)
+        setUnVerified([...tmp])
     }, [])
     
 
@@ -42,7 +48,7 @@ function Registrations({running=false, specialist=[], handler=false}) {
                                         </span>
                                         <span>{item.name}</span>
                                         <span>{item.speciality}</span>
-                                        <span>{item.location.toString()}</span>
+                                        <span>{item.location}</span>
                                         <span className='sep'>Credentials</span>
                                         <span>Reg number: {item.reg}</span>
                                     </div>

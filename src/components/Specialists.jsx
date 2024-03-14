@@ -22,7 +22,7 @@ function Specialists({list=[]}) {
                                 </span>
                                 {/* <span>{item.profile}</span> */}
                                 <span>
-                                    {item.location.toString()}
+                                    {item.location}
                                 </span>
                                 <span>
                                     <span>certification</span>
