@@ -25,9 +25,18 @@ function SideBar({tab=0, handler=false}) {
                 <span>Specialist</span>
             </div>
             <div className={tab == 3?'tabbar active':'tabbar'} onClick={()=> selectTab(3)}>
-                <span>Schedules</span>
+                <span>Facilities</span>
             </div>
             <div className={tab == 4?'tabbar active':'tabbar'} onClick={()=> selectTab(4)}>
+                <span>Tests</span>
+            </div>
+            <div className={tab == 5?'tabbar active':'tabbar'} onClick={()=> selectTab(5)}>
+                <span>Schedules</span>
+            </div>
+            <div className={tab == 6?'tabbar active':'tabbar'} onClick={()=> selectTab(6)}>
+                <span>Diagnosis</span>
+            </div>
+            <div className={tab == 7?'tabbar active':'tabbar'} onClick={()=> selectTab(7)}>
                 <span>Registrations</span>
             </div>
         </div>

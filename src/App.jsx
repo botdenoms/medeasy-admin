@@ -23,6 +23,8 @@ function App() {
   const [users, setUsers] = useState([])
   const [specialists, setSpecialists] = useState([])
   const [schedules, setSchedules] = useState([])
+  // ui controllers
+  const [running, setRunning] = useState(false)
 
   // functions
   const usersData = async() => {
@@ -149,10 +151,12 @@ function App() {
 
   const approve = async(id)=>{
     // approves a specialists
+    setRunning(true)
     const feedback = await updateDoc(doc(collection(db, 'specialists'), id), {
       'verified': true,
       'at': new Date(Date.now())
     })
+    setRunning(false)
     console.log(feedback)
   }
 
@@ -172,6 +176,7 @@ function App() {
         <Content 
           tab={tab} 
           users={users} 
+          running = {running}
           specialists={specialists} 
           schedules={schedules}
           tabHander={tabChange}

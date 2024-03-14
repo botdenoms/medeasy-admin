@@ -13,7 +13,7 @@ function Specialists({list=[]}) {
                                     <span>ID : </span>
                                     {item.id}
                                 </span> */}
-                                <img src={item.profile} alt="cert" className='prof'/>
+                                <img src={item.profile} alt="pro" className='prof'/>
                                 <span id='name'>
                                     {item.name}
                                 </span>

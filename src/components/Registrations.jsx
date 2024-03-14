@@ -1,7 +1,7 @@
 import './styles.css'
 import { useState, useEffect } from 'react'
 
-function Registrations({users=[], specialist=[], handler=false}) {
+function Registrations({running=false, specialist=[], handler=false}) {
 
     // state
     const [unVerified, setUnVerified] = useState([])
@@ -55,7 +55,14 @@ function Registrations({users=[], specialist=[], handler=false}) {
                                 </div>
                                 <div className='controls'>
                                     <button>Reject</button>
-                                    <button className='apr' onClick={()=> approve(index)}>Approve</button>
+                                    {
+                                        !running &&
+                                        <button className='apr' onClick={()=> approve(index)}>Approve</button>
+                                    }
+                                    {
+                                        running &&
+                                        <span>Processing ...</span>
+                                    }
                                 </div>
                             </div>
                         )
