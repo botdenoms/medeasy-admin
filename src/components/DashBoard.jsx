@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react'
 
-import Specialists from "./Specialists"
-
-function DashBoard({users=[], specialists=[], schedules=[],  regHandler=false}) {
+function DashBoard({users=[], specialists=[], schedules=[], facis=[], tests=[], regHandler=false}) {
     
     // state
     const [verified, setVerified] = useState(0)
@@ -43,6 +41,14 @@ function DashBoard({users=[], specialists=[], schedules=[],  regHandler=false}) 
                     <div className="data-row">
                         <span>Specialists: </span>
                         <span>{specialists.length}</span>
+                    </div>
+                    <div className="data-row">
+                        <span>Tests: </span>
+                        <span>{tests.length}</span>
+                    </div>
+                    <div className="data-row">
+                        <span>Facilities: </span>
+                        <span>{facis.length}</span>
                     </div>
                 </div>
             </div>

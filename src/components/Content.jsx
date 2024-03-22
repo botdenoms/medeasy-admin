@@ -9,7 +9,7 @@ import Schedules from './Schedules'
 
 import './styles.css'
 
-function Content({tab=0, users=[], specialists=[], schedules=[], tabHander=false, approveHandler=false, running=false}) {
+function Content({tab=0, users=[], diagnosis=[], tests=[], specialists=[], facilisties=[], schedules=[], tabHander=false, approveHandler=false, running=false}) {
     switch (tab) {
         case 0:
             return <DashBoard 
@@ -17,19 +17,21 @@ function Content({tab=0, users=[], specialists=[], schedules=[], tabHander=false
                     specialists={specialists}
                     schedules={schedules}
                     regHandler={tabHander}
+                    tests={tests}
+                    facis= {facilisties}
                     />
         case 1:
             return <Users users={users}/>
         case 2:
             return <Specialists list={specialists}/>
         case 3:
-            return <Facilities handler={approveHandler}/>
+            return <Facilities handler={approveHandler} list={facilisties}/>
         case 4:
-            return <Tests handler={approveHandler}/>
+            return <Tests handler={approveHandler} list={tests} faci={facilisties} users={users}/>
         case 5:
-            return <Schedules handler={approveHandler}/>
+            return <Schedules handler={approveHandler} list={schedules}/>
         case 6:
-            return <Diagnosis handler={approveHandler}/>
+            return <Diagnosis handler={approveHandler} list={diagnosis}/>
         case 7:
             return <Registrations running={running} specialist={specialists} handler={approveHandler}/>
         default:

@@ -25,6 +25,7 @@ function App() {
   const [facilities, setFacilities] = useState([])
   const [tests, setTests] = useState([])
   const [schedules, setSchedules] = useState([])
+  const [diagnosis, setDiagnosis] = useState([])
   // ui controllers
   const [running, setRunning] = useState(false)
 
@@ -127,8 +128,8 @@ function App() {
             lincence: dt.lincence,
             img: dt.img,
             pobox: dt.pobox,
-            usr: dt.id
-            // at.toDate()
+            usr: dt.id,
+            verified: dt.verified,
           }
           items.push(item)
         }else{
@@ -181,7 +182,7 @@ function App() {
   const daignosisData = async()=>{
     // get data about specialists
     try {
-      const querySnap = await getDocs(collection(db, 'specialists'))
+      const querySnap = await getDocs(collection(db, 'diagnosis'))
       if(querySnap.empty){
         // do data
         return
@@ -189,36 +190,19 @@ function App() {
       var items = []
       querySnap.forEach((doc)=>{
         const dt = doc.data()
-        // check if verified 
-        if(doc.get('verified') === true){
-          // check if geo
-          // doc.get('geo')
-          var item ={
-            id: doc.id,
-            location: dt.location,
-            speciality: dt.speciality,
-            cert: dt.cert,
-            profile: dt.profile,
-            name: dt.name,
-            reg: dt.regNo,
-            verified: dt.verified,
-            at: dt.at.toDate()
-          }
-          items.push(item)
-        }else{
-          var item ={
-            id: doc.id,
-            location: dt.location,
-            speciality: dt.speciality,
-            cert: dt.cert,
-            profile: dt.profile,
-            name: dt.name,
-            reg: dt.regNo
-          }
-          items.push(item)
+        var item ={
+          id: doc.id,
+          findings: dt.findings,
+          recommends: dt.recommends,
+          prescripts: [...dt.prescripts],
+          patient: dt.patient,
+          specialist: dt.specialist,
+          schedule: dt.schedule,
+          at: dt.date.toDate()
         }
+        items.push(item)
       })
-      setSpecialists([...items])
+      setDiagnosis([...items])
     } catch (error) {
       alert(`An error occured:, ${error}`)
     }
@@ -306,6 +290,7 @@ function App() {
     schedulesData()
     facilitiesData()
     testsData()
+    daignosisData()
   }, [])
   
   // ui
@@ -322,6 +307,9 @@ function App() {
           schedules={schedules}
           tabHander={tabChange}
           approveHandler={approve}
+          facilisties={facilities}
+          tests={tests}
+          diagnosis={diagnosis}
           />
       </div>
     </div>

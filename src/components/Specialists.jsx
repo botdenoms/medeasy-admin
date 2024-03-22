@@ -29,6 +29,18 @@ function Specialists({list=[]}) {
                                 </span>
                                 <img src={item.cert} alt="cert" className='cert'/>
                                 {/* <span>{item.at.toDateString()}</span> */}
+                                {
+                                    item.verified &&
+                                    <span className='vrf'>
+                                        Verified
+                                    </span>
+                                }
+                                {
+                                    !item.verified &&
+                                    <span className='unvrf'>
+                                        UnVerified
+                                    </span>
+                                }
                             </div>
                         )
                     })
